@@ -23,25 +23,12 @@ declare(strict_types=1);
 
 namespace Mageplaza\CallForPriceGraphQl\Model\Resolver;
 
-use Magento\Framework\Exception\InputException;
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Exception\GraphQlAuthenticationException;
-use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
-use Magento\Framework\GraphQl\Exception\GraphQlInputException;
-use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Magento\GraphQl\Model\Query\Resolver\Context;
-use Mageplaza\RMA\Helper\Data;
-use Mageplaza\RMA\Model\Api\RequestManagement;
+use Mageplaza\CallForPrice\Helper\Data;
 use Mageplaza\CallForPrice\Model\Api\RequestsManagement;
 use Mageplaza\CallForPrice\Model\RequestsFactory;
-use Mageplaza\RMA\Model\Request\ReplyFactory;
-use Mageplaza\RMA\Model\RequestFactory;
-use Mageplaza\RMA\Model\Request\ItemFactory;
-use Magento\CustomerGraphQl\Model\Customer\GetCustomer;
-use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 
 /**
  * Class CreateRequest
@@ -55,78 +42,30 @@ class CreateRequest implements ResolverInterface
     protected $helperData;
 
     /**
-     * @var RequestManagement
+     * @var RequestsManagement
      */
-    protected $requestManagement;
-
-    /**
-     * @var ReplyFactory
-     */
-    protected $replyFactory;
-
-    /**
-     * @var RequestFactory
-     */
-    protected $requestFactory;
-
-    /**
-     * @var ItemFactory
-     */
-    protected $itemFactory;
-
-    /**
-     * @var GetCustomer
-     */
-    protected $getCustomer;
-
-    /**
-     * @var OrderInterface
-     */
-    protected $order;
-
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    protected $searchCriteria;
-
     protected $requestsManagement;
 
+    /**
+     * @var RequestsFactory
+     */
     protected $requestsFactory;
 
     /**
-     * AbstractRMARequest constructor.
+     * CreateRequest constructor.
      *
      * @param Data $helperData
-     * @param RequestManagement $requestManagement
-     * @param ReplyFactory $replyFactory
-     * @param RequestFactory $requestFactory
-     * @param ItemFactory $itemFactory
-     * @param GetCustomer $getCustomer
-     * @param OrderInterface $order
-     * @param SearchCriteriaBuilder $searchCriteria
+     * @param RequestsManagement $requestsManagement
+     * @param RequestsFactory $requestsFactory
      */
     public function __construct(
         Data $helperData,
-        RequestManagement $requestManagement,
-        ReplyFactory $replyFactory,
-        RequestFactory $requestFactory,
-        ItemFactory $itemFactory,
-        GetCustomer $getCustomer,
-        OrderInterface $order,
-        SearchCriteriaBuilder $searchCriteria,
         RequestsManagement $requestsManagement,
         RequestsFactory $requestsFactory
     ) {
-        $this->helperData        = $helperData;
-        $this->requestManagement = $requestManagement;
-        $this->replyFactory      = $replyFactory;
-        $this->requestFactory    = $requestFactory;
-        $this->itemFactory       = $itemFactory;
-        $this->getCustomer       = $getCustomer;
-        $this->order             = $order;
-        $this->searchCriteria    = $searchCriteria;
+        $this->helperData         = $helperData;
         $this->requestsManagement = $requestsManagement;
-        $this->requestsFactory = $requestsFactory;
+        $this->requestsFactory    = $requestsFactory;
     }
 
     /**
@@ -134,7 +73,6 @@ class CreateRequest implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-
         if (!$this->helperData->isEnabled()) {
             return [];
         }
