@@ -1,0 +1,52 @@
+# Mageplaza
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Mageplaza.com license that is
+# available through the world-wide-web at this URL:
+# https://www.mageplaza.com/LICENSE.txt
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade this extension to newer
+# version in the future.
+#
+# @category    Mageplaza
+# @package     Mageplaza_CallForPriceGraphQl
+# @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+# @license     https://www.mageplaza.com/LICENSE.txt
+
+type Mutation {
+    mpCallForPriceRequest (
+        input: MpCfpRequestsInput! @doc(description: "Data input")
+    ): MpCfpRequestsOutput @resolver(class: "Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\CreateRequest") @doc(description: "Request the price by guest")
+    mpCallForPriceCustomerRequest (
+        input: MpCfpRequestsInput @doc(description: "Data input")
+    ): MpCfpRequestsOutput @resolver(class: "Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\CreateCustomerRequest") @doc(description: "Request the price by customer")
+}
+
+type MpCfpRequestsOutput {
+  request_id: Int @doc(description: "Request Id")
+  created_at: String @doc(description: "Created At")
+  sku: String @doc(description: "Sku")
+  product_id: Int @doc(description: "Product Id")
+  item_product: String @doc(description: "Item Product")
+  store_ids: String @doc(description: "Store Ids")
+  customer_group_ids: String @doc(description: "Customer Group Ids")
+  status: String @doc(description: "Status")
+  name: String @doc(description: "Name")
+  email: String @doc(description: "Email")
+  phone: String @doc(description: "Phone")
+  customer_note: String @doc(description: "Customer Note")
+  internal_note: String @doc(description: "Internal Note")
+  rank_request: Int @doc(description: "Rank Request")
+}
+
+input MpCfpRequestsInput {
+    product_id: Int @doc(description: "Product Id")
+    store_ids: String @doc(description: "Store Ids")
+    name: String @doc(description: "Name")
+    email: String @doc(description: "Email")
+    phone: String @doc(description: "Phone")
+    customer_note: String @doc(description: "Customer Note")
+}
