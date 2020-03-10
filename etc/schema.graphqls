@@ -26,13 +26,13 @@ type Mutation {
 }
 
 type MpCfpRequestsOutput {
-  request_id: Int @doc(description: "Request Id")
+  request_id: Int @doc(description: "Request ID")
   created_at: String @doc(description: "Created At")
   sku: String @doc(description: "Sku")
-  product_id: Int @doc(description: "Product Id")
+  product_id: Int @doc(description: "Product ID")
   item_product: String @doc(description: "Item Product")
   store_ids: String @doc(description: "Store Ids")
-  customer_group_ids: String @doc(description: "Customer Group Ids")
+  customer_group_ids: String @doc(description: "Customer Group IDs")
   status: String @doc(description: "Status")
   name: String @doc(description: "Name")
   email: String @doc(description: "Email")
@@ -43,8 +43,8 @@ type MpCfpRequestsOutput {
 }
 
 input MpCfpRequestsInput {
-    product_id: Int @doc(description: "Product Id")
-    store_ids: String @doc(description: "Store Ids")
+    product_id: Int @doc(description: "Product ID")
+    store_ids: String @doc(description: "Store IDs")
     name: String @doc(description: "Name")
     email: String @doc(description: "Email")
     phone: String @doc(description: "Phone")
