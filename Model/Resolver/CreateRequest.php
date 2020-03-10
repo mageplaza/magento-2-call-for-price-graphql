@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace Mageplaza\CallForPriceGraphQl\Model\Resolver;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
@@ -74,7 +75,7 @@ class CreateRequest implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         if (!$this->helperData->isEnabled()) {
-            return [];
+            throw new LocalizedException(__('Module is disabled.'));
         }
 
         $request = $this->requestsFactory->create()->setData($args['input']);
