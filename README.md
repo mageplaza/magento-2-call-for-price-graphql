@@ -12,7 +12,7 @@ php bin/magento setup:static-content:deploy
 ```
 To start working with **Call For Price GraphQL** in Magento, you need to:
 
-- Use Magento 2.3.x. Return your site to developer mode
+- Use Magento 2.3.x or higher. Return your site to developer mode
 
 - Install [chrome extension](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij?hl=en) (currently does not support other browsers)
 
