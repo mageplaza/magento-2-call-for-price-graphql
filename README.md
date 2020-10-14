@@ -1,4 +1,4 @@
-# Call For Price GraphQl
+# Magento 2 Call For Price GraphQL / PWA
 Mageplaza Call For Price Extension supports getting and pushing data on the website with GraphQl.
 
 ## How to install
