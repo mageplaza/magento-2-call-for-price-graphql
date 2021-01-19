@@ -25,6 +25,12 @@ type Mutation {
     ): MpCfpRequestsOutput @resolver(class: "Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\CreateCustomerRequest") @doc(description: "Request the price by customer")
 }
 
+type Query {
+    mpCallForPriceConfig(
+        storeId: String @doc(description: "Get Config by Store")
+    ): ConfigOutput @resolver(class: "\\Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\Config") @doc(description: "Query to get config of Call For Price.")
+}
+
 type MpCfpRequestsOutput {
   request_id: Int @doc(description: "Request ID")
   created_at: String @doc(description: "Created At")
@@ -49,4 +55,24 @@ input MpCfpRequestsInput {
     email: String @doc(description: "Email")
     phone: String @doc(description: "Phone")
     customer_note: String @doc(description: "Customer Note")
+}
+
+type ConfigOutput {
+    terms_conditions: TermsConditionsOutput @doc(description: "Terms and Conditions")
+    disable_default_function: DisableDefaultFunctionOutput @doc(description: "Disable Default Function")
+}
+
+type TermsConditionsOutput {
+    checked_by_default: Boolean @doc(description: "Checked By Default")
+    terms_required: Boolean @doc(description: "Terms Required")
+    title: String @doc(description: "Title")
+    anchor: String @doc(description: "Anchor")
+    url: String @doc(description: "URL")
+}
+
+type DisableDefaultFunctionOutput {
+    disable_compare_wishlist: Boolean @doc(description: "Disable Compare Wishlist")
+    disable_register_customer: Boolean @doc(description: "Disable Register Customer")
+    disable_cart_by_group: String @doc(description: "Disable Cart By Group")
+    disable_checkout_by_group: String @doc(description: "Disable Checkout By Group")
 }
