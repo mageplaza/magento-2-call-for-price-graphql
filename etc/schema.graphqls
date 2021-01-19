@@ -25,6 +25,10 @@ type Mutation {
     ): MpCfpRequestsOutput @resolver(class: "Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\CreateCustomerRequest") @doc(description: "Request the price by customer")
 }
 
+interface ProductInterface {
+    mp_callforprice_rule: MpCfpRuleOutput @doc(description: "Mageplaza Call For Price Rule applied on the product") @resolver(class: "Mageplaza\\CallForPriceGraphQl\\Model\\Resolver\\RuleDataProvider")
+}
+
 type Query {
     mpCallForPriceConfig(
         storeId: String @doc(description: "Get Config by Store")
@@ -75,4 +79,29 @@ type DisableDefaultFunctionOutput {
     disable_register_customer: Boolean @doc(description: "Disable Register Customer")
     disable_cart_by_group: String @doc(description: "Disable Cart By Group")
     disable_checkout_by_group: String @doc(description: "Disable Checkout By Group")
+}
+
+type MpCfpRuleOutput {
+    rule_id: Int @doc(description: "Rule ID")
+    name: String @doc(description: "Name")
+    rule_content: String @doc(description: "Rule Content")
+    store_ids: String @doc(description: "Store IDs")
+    customer_group_ids: String @doc(description: "Customer Group Ids")
+    action: String @doc(description: "Action")
+    url_redirect: String @doc(description: "Url Redirect")
+    quote_heading: String @doc(description: "Quote Heading")
+    quote_description: String @doc(description: "Quote Description")
+    status: Boolean @doc(description: "Status")
+    show_fields: String @doc(description: "Show Fields")
+    required_fields: String @doc(description: "Required Fields")
+    conditions_serialized: String @doc(description: "Conditions Serialized")
+    attribute_code: String @doc(description: "Attribute Code")
+    button_label: String @doc(description: "Button Label")
+    priority: Int @doc(description: "Priority")
+    to_date: String @doc(description: "To Date")
+    created_at: String @doc(description: "Created At")
+    rule_description: String @doc(description: "Rule Description")
+    enable_terms: Boolean @doc(description: "Enable Terms")
+    url_terms: String @doc(description: "Url Terms")
+    from_date: String @doc(description: "From Date")
 }
