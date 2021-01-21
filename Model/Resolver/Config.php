@@ -29,6 +29,7 @@ use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\CallForPrice\Model\Api\ConfigManagement;
 use Mageplaza\CallForPrice\Helper\Data as HelperData;
+use Magento\Framework\App\RequestInterface;
 
 /**
  * Class Config
@@ -47,17 +48,25 @@ class Config implements ResolverInterface
     protected $configManagement;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * Config constructor.
      *
      * @param HelperData $helperData
      * @param ConfigManagement $configManagement
+     * @param RequestInterface $request
      */
     public function __construct(
         HelperData $helperData,
-        ConfigManagement $configManagement
+        ConfigManagement $configManagement,
+        RequestInterface $request
     ) {
         $this->helperData       = $helperData;
         $this->configManagement = $configManagement;
+        $this->request          = $request;
     }
 
     /**
@@ -68,6 +77,10 @@ class Config implements ResolverInterface
         if (!$this->helperData->isEnabled()) {
             throw new GraphQlNoSuchEntityException(__('Module is disabled.'));
         }
+
+        $params = $this->request->getParams();
+        $params = array_merge($params, $args);
+        $this->request->setParams($params);
 
         return $this->configManagement->getConfig();
     }
