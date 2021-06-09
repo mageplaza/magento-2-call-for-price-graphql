@@ -50,6 +50,7 @@ type MpCfpRequestsOutput {
   customer_note: String @doc(description: "Customer Note")
   internal_note: String @doc(description: "Internal Note")
   rank_request: Int @doc(description: "Rank Request")
+  is_send: Boolean @doc(description: "Is Send")
 }
 
 input MpCfpRequestsInput {
